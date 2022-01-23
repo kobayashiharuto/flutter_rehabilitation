@@ -6,6 +6,7 @@ import 'package:test_interval/data/mocks/task_mock.dart';
 import 'package:test_interval/data/repositories/tasks_repository.dart';
 import 'package:test_interval/screens/tasks/task_create_screen.dart';
 import 'package:test_interval/screens/tasks/task_detail_screen.dart';
+import 'package:test_interval/screens/tasks/task_edit_screen.dart';
 import 'package:test_interval/screens/tasks/task_screen.dart';
 import 'firebase_options.dart';
 
@@ -43,6 +44,11 @@ class MyApp extends StatelessWidget {
             name: 'create',
             path: 'create',
             builder: (_, state) => const TaskCreateScreen(),
+          ),
+          GoRoute(
+            name: 'edit',
+            path: 'edit/:id',
+            builder: (_, state) => TaskEditScreen(id: state.params['id']!),
           ),
         ],
       ),

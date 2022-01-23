@@ -28,9 +28,16 @@ abstract class Task with _$Task {
     );
   }
 
-  // クライアント側から
-  factory Task.fromClient(String title, String description) {
+  // クライアント側からCREATE時
+  factory Task.fromClientOnCreate(String title, String description) {
     return Task(title: title, description: description);
+  }
+
+  // クライアント側からUPDATE時
+  factory Task.fromClientOnUpdate(
+      String id, String title, String description, bool completed) {
+    return Task(
+        id: id, title: title, description: description, completed: completed);
   }
 
   // データベースへ

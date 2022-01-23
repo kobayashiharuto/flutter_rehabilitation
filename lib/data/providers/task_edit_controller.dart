@@ -6,23 +6,22 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:test_interval/data/entities/task.dart';
 import 'package:test_interval/data/repositories/tasks_repository.dart';
 
-part 'task_controller.freezed.dart';
+part 'task_edit_controller.freezed.dart';
 
 // ステート
 @freezed
-abstract class TaskState with _$TaskState {
-  const factory TaskState({
-    @Default('') String title,
-    @Default('') String description,
-  }) = _TaskState;
+abstract class TaskEditState with _$TaskEditState {
+  const factory TaskEditState({
+    bool? completed,
+  }) = _TaskEditState;
 }
 
 // コントローラー
-final taskCreateController =
-    StateNotifierProvider.autoDispose((ref) => TaskCreateController(ref));
+final taskEditController =
+    StateNotifierProvider.autoDispose((ref) => TaskEditController(ref));
 
-class TaskCreateController extends StateNotifier<TaskState> {
-  TaskCreateController(this.ref) : super(const TaskState()) {
+class TaskEditController extends StateNotifier<TaskEditState> {
+  TaskEditController(this.ref) : super(const TaskEditState()) {
     _taskRepo = ref.read(tasksRepositoryProvider);
     ref.onDispose(() {
       titleController.dispose();
@@ -31,17 +30,31 @@ class TaskCreateController extends StateNotifier<TaskState> {
       descriptionFocusNode.dispose();
     });
   }
+
   final Ref ref;
   late final TasksRepository _taskRepo;
+
+  String id = '';
 
   final titleController = TextEditingController(text: '');
   final titleFocusNode = FocusNode();
   final descriptionController = TextEditingController(text: '');
   final descriptionFocusNode = FocusNode();
 
-  void submit() {
-    final task =
-        Task.fromClientOnCreate(titleController.text, descriptionController.text);
-    _taskRepo.create(task);
+  void attach(Task task) {
+    id = task.id!;
+    state = state.copyWith(completed: task.completed);
+    titleController.text = task.title;
+    descriptionController.text = task.description;
+  }
+
+  void update() {
+    final task = Task.fromClientOnUpdate(
+      id,
+      titleController.text,
+      descriptionController.text,
+      state.completed!,
+    );
+    _taskRepo.update(task);
   }
 }

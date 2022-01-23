@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:test_interval/data/providers/tasks_provider.dart';
+import 'package:go_router/go_router.dart';
 
 class TaskDetailScreen extends HookConsumerWidget {
   const TaskDetailScreen({Key? key, required this.id}) : super(key: key);
@@ -20,6 +21,12 @@ class TaskDetailScreen extends HookConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('tasks'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.edit),
+            onPressed: () => context.goNamed('edit', params: {'id': id}),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
