@@ -22,24 +22,20 @@ class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
 
   final _router = GoRouter(
+    initialLocation: '/tasks',
     routes: [
-      GoRoute(
-        path: '/',
-        redirect: (_) => '/tasks',
-      ),
       GoRoute(
         path: '/tasks',
         builder: (_, __) => const TaskScreen(),
-      ),
-      GoRoute(
-        path: '/tasks/detail',
-        builder: (_, state) => TaskDetailScreen(id: state.queryParams['id']!),
+        routes: [
+          GoRoute(
+            name: 'detail',
+            path: 'detail/:id',
+            builder: (_, state) => TaskDetailScreen(id: state.params['id']!),
+          ),
+        ],
       ),
     ],
-    redirect: (state) {
-      // if (state.subloc == '/') return '/tasks';
-      // return null;
-    },
   );
 
   @override
