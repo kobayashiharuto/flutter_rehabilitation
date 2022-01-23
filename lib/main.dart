@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:test_interval/data/mocks/task_mock.dart';
 import 'package:test_interval/data/repositories/tasks_repository.dart';
+import 'package:test_interval/screens/tasks/task_create_screen.dart';
 import 'package:test_interval/screens/tasks/task_detail_screen.dart';
 import 'package:test_interval/screens/tasks/task_screen.dart';
 
@@ -25,12 +26,18 @@ class MyApp extends StatelessWidget {
     routes: [
       GoRoute(
         path: '/tasks',
+        name: 'tasks',
         builder: (_, __) => const TaskScreen(),
         routes: [
           GoRoute(
             name: 'detail',
             path: 'detail/:id',
             builder: (_, state) => TaskDetailScreen(id: state.params['id']!),
+          ),
+          GoRoute(
+            name: 'create',
+            path: 'create',
+            builder: (_, state) => const TaskCreateScreen(),
           ),
         ],
       ),

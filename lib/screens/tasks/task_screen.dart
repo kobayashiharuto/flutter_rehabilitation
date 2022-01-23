@@ -23,6 +23,10 @@ class TaskScreen extends HookConsumerWidget {
               context.goNamed('detail', params: {'id': _tasks[index].id}),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => context.goNamed('create'),
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }

@@ -25,19 +25,20 @@ class TasksRepository {
   }
 
   void create(Task task) {
-    final tasks = ref.read(tasksProvider)..add(task);
+    final tasks = List<Task>.from(ref.read(tasksProvider))..add(task);
     tasksStreamController.add(tasks);
   }
 
   void update(Task task) {
-    final tasks = ref.read(tasksProvider);
+    final tasks = List<Task>.from(ref.read(tasksProvider));
     final index = tasks.indexWhere((e) => e.id == task.id);
     tasks[index] = task;
     tasksStreamController.add(tasks);
   }
 
   void delete(Task task) {
-    final tasks = ref.read(tasksProvider)..removeWhere((e) => e.id == task.id);
+    final tasks = List<Task>.from(ref.read(tasksProvider))
+      ..removeWhere((e) => e.id == task.id);
     tasksStreamController.add(tasks);
   }
 
