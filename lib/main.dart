@@ -24,6 +24,10 @@ class MyApp extends StatelessWidget {
   final _router = GoRouter(
     routes: [
       GoRoute(
+        path: '/',
+        redirect: (_) => '/tasks',
+      ),
+      GoRoute(
         path: '/tasks',
         builder: (_, __) => const TaskScreen(),
       ),
@@ -33,8 +37,8 @@ class MyApp extends StatelessWidget {
       ),
     ],
     redirect: (state) {
-      if (state.subloc == '/') return '/tasks';
-      return null;
+      // if (state.subloc == '/') return '/tasks';
+      // return null;
     },
   );
 
