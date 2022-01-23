@@ -19,9 +19,9 @@ class _$TaskTearOff {
   const _$TaskTearOff();
 
   _Task call(
-      {String id = '',
-      String title = '',
-      String description = '',
+      {String? id,
+      required String title,
+      required String description,
       bool completed = false}) {
     return _Task(
       id: id,
@@ -37,7 +37,7 @@ const $Task = _$TaskTearOff();
 
 /// @nodoc
 mixin _$Task {
-  String get id => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   bool get completed => throw _privateConstructorUsedError;
@@ -50,7 +50,7 @@ mixin _$Task {
 abstract class $TaskCopyWith<$Res> {
   factory $TaskCopyWith(Task value, $Res Function(Task) then) =
       _$TaskCopyWithImpl<$Res>;
-  $Res call({String id, String title, String description, bool completed});
+  $Res call({String? id, String title, String description, bool completed});
 }
 
 /// @nodoc
@@ -72,7 +72,7 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -94,7 +94,7 @@ abstract class _$TaskCopyWith<$Res> implements $TaskCopyWith<$Res> {
   factory _$TaskCopyWith(_Task value, $Res Function(_Task) then) =
       __$TaskCopyWithImpl<$Res>;
   @override
-  $Res call({String id, String title, String description, bool completed});
+  $Res call({String? id, String title, String description, bool completed});
 }
 
 /// @nodoc
@@ -117,7 +117,7 @@ class __$TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -138,19 +138,16 @@ class __$TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
 
 class _$_Task extends _Task {
   const _$_Task(
-      {this.id = '',
-      this.title = '',
-      this.description = '',
+      {this.id,
+      required this.title,
+      required this.description,
       this.completed = false})
       : super._();
 
-  @JsonKey()
   @override
-  final String id;
-  @JsonKey()
+  final String? id;
   @override
   final String title;
-  @JsonKey()
   @override
   final String description;
   @JsonKey()
@@ -190,11 +187,14 @@ class _$_Task extends _Task {
 
 abstract class _Task extends Task {
   const factory _Task(
-      {String id, String title, String description, bool completed}) = _$_Task;
+      {String? id,
+      required String title,
+      required String description,
+      bool completed}) = _$_Task;
   const _Task._() : super._();
 
   @override
-  String get id;
+  String? get id;
   @override
   String get title;
   @override

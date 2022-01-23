@@ -40,12 +40,8 @@ class TaskCreateController extends StateNotifier<TaskState> {
   final descriptionFocusNode = FocusNode();
 
   void submit() {
-    final id = Random().nextInt(10000).toString();
-    final task = Task(
-        id: id,
-        title: titleController.text,
-        description: descriptionController.text,
-        completed: false);
+    final task =
+        Task.fromClient(titleController.text, descriptionController.text);
     _taskRepo.create(task);
   }
 }

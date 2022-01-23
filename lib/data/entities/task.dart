@@ -9,9 +9,9 @@ part 'task.freezed.dart';
 @freezed
 abstract class Task with _$Task {
   const factory Task({
-    @Default('') String id,
-    @Default('') String title,
-    @Default('') String description,
+    String? id,
+    required String title,
+    required String description,
     @Default(false) bool completed,
   }) = _Task;
 
@@ -20,12 +20,27 @@ abstract class Task with _$Task {
   // firebaseから取ってきたsnapshotをもとにインスタンスを返すコンストラクタ
   factory Task.fromDoc(QueryDocumentSnapshot doc) {
     final data = doc.data()! as Map<String, dynamic>;
-
     return Task(
       id: doc.id,
       title: data['title'] as String,
       description: data['description'] as String,
       completed: data['completed'] as bool,
     );
+  }
+
+  // クライアント側から
+  factory Task.fromClient(String title, String description) {
+    return Task(title: title, description: description);
+  }
+
+  // データベースへ
+  Map<String, dynamic> toMap(String uid) {
+    final map = {
+      'uid': uid,
+      'title': title,
+      'description': description,
+      'completed': false,
+    };
+    return map;
   }
 }

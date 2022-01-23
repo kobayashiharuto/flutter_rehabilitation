@@ -17,25 +17,37 @@ class TasksRepository {
 
   final tasksStreamController = StreamController<List<Task>>();
   final _db = FirebaseFirestore.instance;
-  late final _tasksRef =
-      _db.collection('tasks').doc('ylVxe2Pk2ceMnNMEIWj4').collection('tasks');
+  final uid = 'ylVxe2Pk2ceMnNMEIWj4';
+  late final _tasksReadRef =
+      _db.collection('tasks').where('uid', isEqualTo: uid);
+  late final _tasksWriteRef = _db.collection('tasks');
 
   // ignore: avoid_void_async
   void listen() async {
-    final listner = _tasksRef.snapshots();
+    final listner = _tasksReadRef.snapshots();
     await for (final snaps in listner) {
       final tasks = snaps.docs.map((e) => Task.fromDoc(e)).toList();
       tasksStreamController.add(tasks);
     }
   }
 
-  void create(Task task) {}
+  Future<void> create(Task task) async {
+    final map = task.toMap(uid);
+    await _tasksWriteRef.add(map);
+  }
 
-  void update(Task task) {}
+  Future<void> update(Task task) async {
+    final id = task.id!;
+    final map = task.toMap(uid);
+    await _tasksWriteRef.doc(id).update(map);
+  }
 
-  void delete(Task task) {}
+  Future<void> delete(Task task) async {
+    final id = task.id!;
+    await _tasksWriteRef.doc(id).delete();
+  }
 
-  void dispose() {}
+  Future<void> dispose() async {}
 
   void injection(List<Task> tasks) {
     tasksStreamController.add(tasks);

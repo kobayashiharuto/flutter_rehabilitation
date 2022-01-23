@@ -20,7 +20,7 @@ class TaskScreen extends HookConsumerWidget {
         itemBuilder: (context, index) => GestureDetector(
           child: TaskCell(task: _tasks[index]),
           onTap: () =>
-              context.goNamed('detail', params: {'id': _tasks[index].id}),
+              context.goNamed('detail', params: {'id': _tasks[index].id!}),
         ),
       ),
       floatingActionButton: FloatingActionButton(
