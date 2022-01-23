@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -8,12 +7,12 @@ import 'package:test_interval/screens/tasks/task_detail_screen.dart';
 import 'package:test_interval/screens/tasks/task_screen.dart';
 
 void main() {
-  final _taskRepository = TasksRepository();
+  // final _taskRepository = TasksRepository();
   // ignore: cascade_invocations
-  _taskRepository.injection(mockTasks);
+  // _taskRepository.injection(mockTasks);
 
   runApp(ProviderScope(
-    overrides: [tasksRepositoryProvider.overrideWithValue(_taskRepository)],
+    // overrides: [tasksRepositoryProvider.overrideWithValue(_taskRepository)],
     child: MyApp(),
   ));
 }
