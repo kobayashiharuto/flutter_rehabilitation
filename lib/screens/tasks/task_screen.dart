@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:test_interval/data/providers/tasks_provider.dart';
+import 'package:test_interval/screens/tasks/components/task_cell.dart';
 
 class TaskScreen extends HookConsumerWidget {
   const TaskScreen({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class TaskScreen extends HookConsumerWidget {
       ),
       body: ListView.builder(
         itemCount: _tasks.length,
-        itemBuilder: (context, index) => Text(_tasks[index].title),
+        itemBuilder: (context, index) => TaskCell(task: _tasks[index]),
       ),
     );
   }
