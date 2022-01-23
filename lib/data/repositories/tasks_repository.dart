@@ -1,46 +1,38 @@
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:test_interval/data/entities/task.dart';
-import 'package:test_interval/data/mocks/task_mock.dart';
 import 'package:test_interval/data/providers/tasks_provider.dart';
 
 final tasksRepositoryProvider = Provider.autoDispose<TasksRepository>((ref) {
-  final _repository = TasksRepository(ref);
+  final _repository = TasksRepository();
   ref.onDispose(_repository.dispose);
   return _repository;
 });
 
 class TasksRepository {
-  TasksRepository(this.ref) {
+  TasksRepository() {
     listen();
   }
 
-  Ref ref;
-
   final tasksStreamController = StreamController<List<Task>>();
+  final _db = FirebaseFirestore.instance;
+  late final _tasksRef =
+      _db.collection('tasks').doc('ylVxe2Pk2ceMnNMEIWj4').collection('tasks');
 
-  void listen() {
-    // tasksStreamController.add();
-    injection(mockTasks);
+  void listen() async {
+    final listner = _tasksRef.snapshots();
+    await for (var snaps in listner) {
+      // snaps.do
+      // tasksStreamController()
+    }
   }
 
-  void create(Task task) {
-    final tasks = List<Task>.from(ref.read(tasksProvider))..add(task);
-    tasksStreamController.add(tasks);
-  }
+  void create(Task task) {}
 
-  void update(Task task) {
-    final tasks = List<Task>.from(ref.read(tasksProvider));
-    final index = tasks.indexWhere((e) => e.id == task.id);
-    tasks[index] = task;
-    tasksStreamController.add(tasks);
-  }
+  void update(Task task) {}
 
-  void delete(Task task) {
-    final tasks = List<Task>.from(ref.read(tasksProvider))
-      ..removeWhere((e) => e.id == task.id);
-    tasksStreamController.add(tasks);
-  }
+  void delete(Task task) {}
 
   void dispose() {}
 

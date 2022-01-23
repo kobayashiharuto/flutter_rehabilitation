@@ -1,25 +1,17 @@
-import 'package:flutter/foundation.dart';
+import 'dart:ffi';
 
-@immutable
-class Task {
-  const Task(
-      {required this.id,
-      required this.title,
-      required this.description,
-      required this.completed});
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  final String id;
-  final String title;
-  final String description;
-  final bool completed;
+part 'task.freezed.dart';
 
-  Task copyWith(
-      {String? id, String? title, String? description, bool? completed}) {
-    return Task(
-      id: id ?? this.id,
-      title: title ?? this.title,
-      description: description ?? this.description,
-      completed: completed ?? this.completed,
-    );
-  }
+// ステート
+@freezed
+abstract class Task with _$Task {
+  const factory Task({
+    @Default('') String id,
+    @Default('') String title,
+    @Default('') String description,
+    @Default(false) bool completed,
+  }) = _Task;
 }
