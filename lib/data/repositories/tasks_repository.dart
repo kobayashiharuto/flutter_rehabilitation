@@ -20,11 +20,12 @@ class TasksRepository {
   late final _tasksRef =
       _db.collection('tasks').doc('ylVxe2Pk2ceMnNMEIWj4').collection('tasks');
 
+  // ignore: avoid_void_async
   void listen() async {
     final listner = _tasksRef.snapshots();
-    await for (var snaps in listner) {
-      // snaps.do
-      // tasksStreamController()
+    await for (final snaps in listner) {
+      final tasks = snaps.docs.map((e) => Task.fromDoc(e)).toList();
+      tasksStreamController.add(tasks);
     }
   }
 

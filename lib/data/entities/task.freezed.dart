@@ -136,12 +136,13 @@ class __$TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Task implements _Task {
+class _$_Task extends _Task {
   const _$_Task(
       {this.id = '',
       this.title = '',
       this.description = '',
-      this.completed = false});
+      this.completed = false})
+      : super._();
 
   @JsonKey()
   @override
@@ -187,9 +188,10 @@ class _$_Task implements _Task {
       __$TaskCopyWithImpl<_Task>(this, _$identity);
 }
 
-abstract class _Task implements Task {
+abstract class _Task extends Task {
   const factory _Task(
       {String id, String title, String description, bool completed}) = _$_Task;
+  const _Task._() : super._();
 
   @override
   String get id;

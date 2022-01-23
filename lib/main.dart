@@ -10,15 +10,15 @@ import 'package:test_interval/screens/tasks/task_screen.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
-  final _taskRepository = TasksRepository();
-  // ignore: cascade_invocations
-  _taskRepository.injection(mockTasks);
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  final _taskRepository = TasksRepository();
+
   runApp(ProviderScope(
-    // overrides: [tasksRepositoryProvider.overrideWithValue(_taskRepository)],
+    overrides: [tasksRepositoryProvider.overrideWithValue(_taskRepository)],
     child: MyApp(),
   ));
 }
