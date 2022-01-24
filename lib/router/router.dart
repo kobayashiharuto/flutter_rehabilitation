@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:test_interval/data/providers/session_status_provider.dart';
 import 'package:test_interval/router/bottom_navigation_bar.dart';
+import 'package:test_interval/router/observer.dart';
 import 'package:test_interval/screens/init_loading/init_loading_screen.dart';
 import 'package:test_interval/screens/login/login_screen.dart';
 import 'package:test_interval/screens/settings/settings_screen.dart';
@@ -73,7 +74,8 @@ class MyApp extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp.router(
         routeInformationParser: const RoutemasterParser(),
-        routerDelegate:
-            RoutemasterDelegate(routesBuilder: (_) => ref.watch(_router)));
+        routerDelegate: RoutemasterDelegate(
+            observers: [MyRouteObserver()],
+            routesBuilder: (_) => ref.watch(_router)));
   }
 }
