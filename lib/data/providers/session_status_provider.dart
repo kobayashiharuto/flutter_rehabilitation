@@ -17,9 +17,9 @@ class SessionStatusWrapper with _$SessionStatusWrapper {
 }
 
 // コントローラー
-final sessionStatusProvider = StateNotifierProvider.autoDispose<
-    SessionStatusProvider,
-    SessionStatusWrapper>((_) => SessionStatusProvider());
+final sessionStatusProvider =
+    StateNotifierProvider<SessionStatusProvider, SessionStatusWrapper>(
+        (_) => SessionStatusProvider());
 
 class SessionStatusProvider extends StateNotifierWithLog<SessionStatusWrapper> {
   SessionStatusProvider() : super(const SessionStatusWrapper()) {
