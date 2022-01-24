@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logging/logging.dart';
 
 // StateNotifier関連のログ
@@ -16,4 +17,19 @@ void logSetting() {
 
   stateNotifierLog.level = Level.ALL;
   modelLog.level = Level.ALL;
+}
+
+// ignore: unused_element
+class ProviderDebugLogger extends ProviderObserver {
+  @override
+  void didUpdateProvider(ProviderBase<dynamic> provider, Object? previousValue,
+      Object? newValue, ProviderContainer container) {
+    debugPrint('''
+  ---------------------------------Provider Log Start-------------------------------
+  "provider": "${provider.name ?? provider.runtimeType}",
+  "previousValue": "$previousValue"
+  "newValue": "$newValue"
+  ---------------------------------Provider Log End---------------------------------
+''');
+  }
 }

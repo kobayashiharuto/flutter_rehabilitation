@@ -16,6 +16,7 @@ Future<void> main() async {
 
   runApp(ProviderScope(
     overrides: const [],
+    observers: [ProviderDebugLogger()],
     child: MyApp(),
   ));
 }
