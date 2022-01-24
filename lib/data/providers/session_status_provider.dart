@@ -1,11 +1,7 @@
-import 'dart:math';
-
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:test_interval/data/entities/task.dart';
-import 'package:test_interval/data/repositories/tasks_repository.dart';
+import 'package:test_interval/extensions/state_notifier_log.dart';
 
 part 'session_status_provider.freezed.dart';
 
@@ -25,7 +21,7 @@ final sessionStatusProvider = StateNotifierProvider.autoDispose<
     SessionStatusProvider,
     SessionStatusWrapper>((_) => SessionStatusProvider());
 
-class SessionStatusProvider extends StateNotifier<SessionStatusWrapper> {
+class SessionStatusProvider extends StateNotifierWithLog<SessionStatusWrapper> {
   SessionStatusProvider() : super(const SessionStatusWrapper()) {
     listen();
   }

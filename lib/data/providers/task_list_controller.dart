@@ -1,12 +1,10 @@
 import 'dart:async';
-import 'dart:math';
-
-import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:test_interval/data/entities/task.dart';
 import 'package:test_interval/data/providers/session_status_provider.dart';
 import 'package:test_interval/data/repositories/tasks_repository.dart';
+import 'package:test_interval/extensions/state_notifier_log.dart';
 
 part 'task_list_controller.freezed.dart';
 
@@ -24,11 +22,10 @@ final taskListViewController = StateNotifierProvider.autoDispose<
     TaskListViewController, TaskListViewState>((ref) {
   final uid = ref.watch(sessionStatusProvider).uid!;
   final controller = TaskListViewController(uid);
-  ref.onDispose(controller.dispose);
   return controller;
 });
 
-class TaskListViewController extends StateNotifier<TaskListViewState> {
+class TaskListViewController extends StateNotifierWithLog<TaskListViewState> {
   TaskListViewController(String uid)
       : _taskRepo = TasksRepository(uid),
         super(const TaskListViewState()) {

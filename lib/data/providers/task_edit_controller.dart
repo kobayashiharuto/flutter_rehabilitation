@@ -1,11 +1,10 @@
-import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:test_interval/data/entities/task.dart';
 import 'package:test_interval/data/providers/session_status_provider.dart';
 import 'package:test_interval/data/repositories/tasks_repository.dart';
+import 'package:test_interval/extensions/state_notifier_log.dart';
 
 part 'task_edit_controller.freezed.dart';
 
@@ -21,14 +20,12 @@ abstract class TaskEditViewState with _$TaskEditViewState {
 // コントローラー
 final taskEditViewController = StateNotifierProvider.autoDispose
     .family<TaskEditViewController, TaskEditViewState, Task>((ref, task) {
-  debugPrint('CREATE!');
   final uid = ref.watch(sessionStatusProvider).uid!;
   final controller = TaskEditViewController(task, uid);
-  ref.onDispose(controller.dispose);
   return controller;
 });
 
-class TaskEditViewController extends StateNotifier<TaskEditViewState> {
+class TaskEditViewController extends StateNotifierWithLog<TaskEditViewState> {
   TaskEditViewController(Task task, String uid)
       : _taskRepo = TasksRepository(uid),
         _id = task.id!,
@@ -61,7 +58,6 @@ class TaskEditViewController extends StateNotifier<TaskEditViewState> {
   @override
   void dispose() {
     super.dispose();
-    debugPrint('Dispose!');
     titleController.dispose();
     titleFocusNode.dispose();
     descriptionController.dispose();
