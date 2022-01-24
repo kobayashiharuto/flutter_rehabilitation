@@ -15,11 +15,14 @@ class TaskEditScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _task = ref
-        .read(taskListViewController)
-        .tasks
-        .firstWhereOrNull((item) => item.id == id);
-    final _taskVM = ref.watch(taskEditViewController(_task!).notifier);
+    final _task = ref.watch(taskListViewController).getTask(id);
+
+    if (_task == null) {
+      context.goNamed('tasks');
+      return const Scaffold(body: Text(''));
+    }
+
+    final _taskVM = ref.watch(taskEditViewController(_task).notifier);
 
     return Scaffold(
       appBar: AppBar(

@@ -10,11 +10,17 @@ part 'task_list_controller.freezed.dart';
 
 // ステート
 @freezed
-abstract class TaskListViewState with _$TaskListViewState {
+class TaskListViewState with _$TaskListViewState {
   const factory TaskListViewState({
     @Default(true) bool onScreenLoading,
     @Default(<Task>[]) List<Task> tasks,
   }) = _TaskListViewState;
+
+  const TaskListViewState._();
+
+  Task? getTask(String id) {
+    return tasks.firstWhereOrNull((item) => item.id == id);
+  }
 }
 
 // コントローラー

@@ -10,7 +10,7 @@ part 'task_edit_controller.freezed.dart';
 
 // ステート
 @freezed
-abstract class TaskEditViewState with _$TaskEditViewState {
+class TaskEditViewState with _$TaskEditViewState {
   const factory TaskEditViewState({
     required bool completed,
     required DateTime dateTime,

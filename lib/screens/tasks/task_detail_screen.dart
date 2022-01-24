@@ -11,13 +11,10 @@ class TaskDetailScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _task = ref
-        .watch(taskListViewController)
-        .tasks
-        .firstWhereOrNull((item) => item.id == id);
+    final _task = ref.watch(taskListViewController).getTask(id);
 
     if (_task == null) {
-      return Scaffold(body: Text('not'));
+      return const Scaffold(body: Text(''));
     }
 
     return Scaffold(

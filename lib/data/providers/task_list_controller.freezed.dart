@@ -116,9 +116,10 @@ class __$TaskListViewStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_TaskListViewState implements _TaskListViewState {
+class _$_TaskListViewState extends _TaskListViewState {
   const _$_TaskListViewState(
-      {this.onScreenLoading = true, this.tasks = const <Task>[]});
+      {this.onScreenLoading = true, this.tasks = const <Task>[]})
+      : super._();
 
   @JsonKey()
   @override
@@ -154,9 +155,10 @@ class _$_TaskListViewState implements _TaskListViewState {
       __$TaskListViewStateCopyWithImpl<_TaskListViewState>(this, _$identity);
 }
 
-abstract class _TaskListViewState implements TaskListViewState {
+abstract class _TaskListViewState extends TaskListViewState {
   const factory _TaskListViewState({bool onScreenLoading, List<Task> tasks}) =
       _$_TaskListViewState;
+  const _TaskListViewState._() : super._();
 
   @override
   bool get onScreenLoading;

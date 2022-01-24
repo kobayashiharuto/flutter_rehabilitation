@@ -10,7 +10,7 @@ part 'task_create_controller.freezed.dart';
 
 // ステート
 @freezed
-abstract class TaskCreateViewState with _$TaskCreateViewState {
+class TaskCreateViewState with _$TaskCreateViewState {
   const factory TaskCreateViewState({
     @Default('') String title,
     @Default('') String description,
