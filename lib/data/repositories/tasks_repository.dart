@@ -1,9 +1,6 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:test_interval/data/entities/task.dart';
-import 'package:test_interval/data/providers/session_status_provider.dart';
 
 class TasksRepository {
   TasksRepository(String uid) {

@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:test_interval/extensions/state_notifier_log.dart';
+import 'package:test_interval/utils/extensions/state_notifier_log.dart';
 
 part 'session_status_provider.freezed.dart';
 

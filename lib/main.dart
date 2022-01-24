@@ -2,16 +2,15 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:test_interval/data/mocks/task_mock.dart';
 import 'package:test_interval/data/providers/session_status_provider.dart';
-import 'package:test_interval/data/repositories/tasks_repository.dart';
-import 'package:test_interval/logger/logger.dart';
 import 'package:test_interval/screens/init_loading/init_loading_screen.dart';
 import 'package:test_interval/screens/login/login_screen.dart';
 import 'package:test_interval/screens/tasks/task_create_screen.dart';
 import 'package:test_interval/screens/tasks/task_detail_screen.dart';
 import 'package:test_interval/screens/tasks/task_edit_screen.dart';
 import 'package:test_interval/screens/tasks/task_screen.dart';
+import 'package:test_interval/utils/tools/logger.dart';
+
 import 'firebase_options.dart';
 
 Future<void> main() async {

@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:test_interval/data/entities/task.dart';
 import 'package:test_interval/data/providers/session_status_provider.dart';
 import 'package:test_interval/data/repositories/tasks_repository.dart';
-import 'package:test_interval/extensions/state_notifier_log.dart';
+import 'package:test_interval/utils/extensions/state_notifier_log.dart';
 
 part 'task_edit_controller.freezed.dart';
 
