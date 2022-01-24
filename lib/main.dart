@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:test_interval/data/mocks/task_mock.dart';
 import 'package:test_interval/data/providers/session_status_provider.dart';
 import 'package:test_interval/data/repositories/tasks_repository.dart';
+import 'package:test_interval/logger/logger.dart';
 import 'package:test_interval/screens/init_loading/init_loading_screen.dart';
 import 'package:test_interval/screens/login/login_screen.dart';
 import 'package:test_interval/screens/tasks/task_create_screen.dart';
@@ -18,6 +19,8 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  logSetting();
 
   runApp(ProviderScope(
     overrides: const [],
