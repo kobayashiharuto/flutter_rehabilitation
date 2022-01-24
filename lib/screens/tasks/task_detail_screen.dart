@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:routemaster/routemaster.dart';
 import 'package:test_interval/data/providers/task_list_controller.dart';
 
 class TaskDetailScreen extends HookConsumerWidget {
@@ -22,7 +22,8 @@ class TaskDetailScreen extends HookConsumerWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.edit),
-            onPressed: () => context.goNamed('edit', params: {'id': id}),
+            onPressed: () =>
+                Routemaster.of(context).push('/tasks/detail/$id/edit'),
           ),
         ],
       ),

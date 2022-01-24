@@ -15,10 +15,10 @@ dependencies:
     sdk: flutter
   flutter_hooks: ^0.18.2
   freezed_annotation:
-  go_router: ^3.0.1
   hooks_riverpod: ^1.0.3
   json_annotation: ^4.4.0
   logging: ^1.0.2
+  routemaster: ^0.9.5
   shared_preferences: ^2.0.12
 
 dev_dependencies:

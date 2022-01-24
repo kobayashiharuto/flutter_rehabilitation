@@ -20,18 +20,18 @@ class TaskCreateViewState with _$TaskCreateViewState {
 // コントローラー
 final taskCreateViewController = StateNotifierProvider.autoDispose<
     TaskCreateViewController, TaskCreateViewState>((ref) {
-  final uid = ref.watch(sessionStatusProvider).uid!;
+  final uid = ref.watch(sessionStatusProvider).uid;
   final controller = TaskCreateViewController(uid);
   return controller;
 });
 
 class TaskCreateViewController
     extends StateNotifierWithLog<TaskCreateViewState> {
-  TaskCreateViewController(String uid)
-      : _taskRepo = TasksRepository(uid),
+  TaskCreateViewController(String? uid)
+      : _taskRepo = uid != null ? TasksRepository(uid) : null,
         super(const TaskCreateViewState());
 
-  final TasksRepository _taskRepo;
+  final TasksRepository? _taskRepo;
 
   final titleController = TextEditingController(text: '');
   final titleFocusNode = FocusNode();
@@ -41,7 +41,7 @@ class TaskCreateViewController
   void submit() {
     final task = Task.fromClientOnCreate(
         titleController.text, descriptionController.text, DateTime.now());
-    _taskRepo.create(task);
+    _taskRepo?.create(task);
   }
 
   @override

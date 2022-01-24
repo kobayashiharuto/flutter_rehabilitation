@@ -26,23 +26,23 @@ class TaskListViewState with _$TaskListViewState {
 // コントローラー
 final taskListViewController = StateNotifierProvider.autoDispose<
     TaskListViewController, TaskListViewState>((ref) {
-  final uid = ref.watch(sessionStatusProvider).uid!;
+  final uid = ref.watch(sessionStatusProvider).uid;
   final controller = TaskListViewController(uid);
   return controller;
 });
 
 class TaskListViewController extends StateNotifierWithLog<TaskListViewState> {
-  TaskListViewController(String uid)
-      : _taskRepo = TasksRepository(uid),
+  TaskListViewController(String? uid)
+      : _taskRepo = uid != null ? TasksRepository(uid) : null,
         super(const TaskListViewState()) {
     listen();
   }
 
-  final TasksRepository _taskRepo;
+  final TasksRepository? _taskRepo;
   StreamSubscription<List<Task>>? listener;
 
   void listen() {
-    listener = _taskRepo.getListner().listen((tasks) {
+    listener = _taskRepo?.getListner().listen((tasks) {
       state = state.copyWith(tasks: tasks, onScreenLoading: false);
     });
   }

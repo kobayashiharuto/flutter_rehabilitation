@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:routemaster/routemaster.dart';
 import 'package:test_interval/data/providers/task_create_controller.dart';
 
 class TaskCreateScreen extends HookConsumerWidget {
@@ -35,7 +35,7 @@ class TaskCreateScreen extends HookConsumerWidget {
               ),
               onPressed: () {
                 _taskCreateVM.submit();
-                context.goNamed('tasks');
+                Routemaster.of(context).push('/tasks');
               },
               child: const Text('submit'),
             ),

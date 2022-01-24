@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:routemaster/routemaster.dart';
 import 'package:test_interval/data/providers/task_edit_controller.dart';
 import 'package:test_interval/data/providers/task_list_controller.dart';
 
@@ -14,7 +14,6 @@ class TaskEditScreen extends HookConsumerWidget {
     final _task = ref.watch(taskListViewController).getTask(id);
 
     if (_task == null) {
-      context.goNamed('tasks');
       return const Scaffold(body: Text(''));
     }
 
@@ -45,7 +44,7 @@ class TaskEditScreen extends HookConsumerWidget {
               ),
               onPressed: () {
                 _taskVM.update();
-                context.goNamed('detail', params: {'id': id});
+                Routemaster.of(context).push('/tasks/detail/$id');
               },
               child: const Text('submit'),
             ),

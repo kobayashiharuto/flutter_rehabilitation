@@ -20,14 +20,14 @@ class TaskEditViewState with _$TaskEditViewState {
 // コントローラー
 final taskEditViewController = StateNotifierProvider.autoDispose
     .family<TaskEditViewController, TaskEditViewState, Task>((ref, task) {
-  final uid = ref.watch(sessionStatusProvider).uid!;
+  final uid = ref.watch(sessionStatusProvider).uid;
   final controller = TaskEditViewController(task, uid);
   return controller;
 });
 
 class TaskEditViewController extends StateNotifierWithLog<TaskEditViewState> {
-  TaskEditViewController(Task task, String uid)
-      : _taskRepo = TasksRepository(uid),
+  TaskEditViewController(Task task, String? uid)
+      : _taskRepo = uid != null ? TasksRepository(uid) : null,
         _id = task.id!,
         super(TaskEditViewState(
             completed: task.completed, dateTime: task.dealine)) {
@@ -37,7 +37,7 @@ class TaskEditViewController extends StateNotifierWithLog<TaskEditViewState> {
   }
 
   final String _id;
-  final TasksRepository _taskRepo;
+  final TasksRepository? _taskRepo;
 
   final titleController = TextEditingController(text: '');
   final titleFocusNode = FocusNode();
@@ -52,7 +52,7 @@ class TaskEditViewController extends StateNotifierWithLog<TaskEditViewState> {
       state.dateTime,
       state.completed,
     );
-    await _taskRepo.update(task);
+    await _taskRepo?.update(task);
   }
 
   @override
