@@ -19,10 +19,8 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  final _taskRepository = TasksRepository();
-
   runApp(ProviderScope(
-    overrides: [tasksRepositoryProvider.overrideWithValue(_taskRepository)],
+    overrides: const [],
     child: MyApp(),
   ));
 }

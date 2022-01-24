@@ -14,8 +14,10 @@ enum SessionStatus { login, logout }
 // ステート
 @freezed
 class SessionStatusWrapper with _$SessionStatusWrapper {
-  const factory SessionStatusWrapper({SessionStatus? sessionStatus}) =
-      _SessionStatusWrapper;
+  const factory SessionStatusWrapper({
+    SessionStatus? sessionStatus,
+    String? uid,
+  }) = _SessionStatusWrapper;
 }
 
 // コントローラー
@@ -30,12 +32,14 @@ class SessionStatusProvider extends StateNotifier<SessionStatusWrapper> {
 
   void listen() {
     FirebaseAuth.instance.authStateChanges().listen(
-      (status) {
-        if (status == null) {
-          state = state.copyWith(sessionStatus: SessionStatus.logout);
+      (user) {
+        if (user == null) {
+          state =
+              state.copyWith(sessionStatus: SessionStatus.logout, uid: null);
           return;
         }
-        state = state.copyWith(sessionStatus: SessionStatus.login);
+        state =
+            state.copyWith(sessionStatus: SessionStatus.login, uid: user.uid);
       },
     );
   }

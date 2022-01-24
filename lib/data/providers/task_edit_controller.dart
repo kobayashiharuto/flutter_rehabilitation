@@ -4,57 +4,67 @@ import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:test_interval/data/entities/task.dart';
+import 'package:test_interval/data/providers/session_status_provider.dart';
 import 'package:test_interval/data/repositories/tasks_repository.dart';
 
 part 'task_edit_controller.freezed.dart';
 
 // ステート
 @freezed
-abstract class TaskEditState with _$TaskEditState {
-  const factory TaskEditState({
-    bool? completed,
-  }) = _TaskEditState;
+abstract class TaskEditViewState with _$TaskEditViewState {
+  const factory TaskEditViewState({
+    required bool completed,
+    required DateTime dateTime,
+  }) = _TaskEditViewState;
 }
 
 // コントローラー
-final taskEditController =
-    StateNotifierProvider.autoDispose((ref) => TaskEditController(ref));
+final taskEditViewController = StateNotifierProvider.autoDispose
+    .family<TaskEditViewController, TaskEditViewState, Task>((ref, task) {
+  debugPrint('CREATE!');
+  final uid = ref.watch(sessionStatusProvider).uid!;
+  final controller = TaskEditViewController(task, uid);
+  ref.onDispose(controller.dispose);
+  return controller;
+});
 
-class TaskEditController extends StateNotifier<TaskEditState> {
-  TaskEditController(this.ref) : super(const TaskEditState()) {
-    _taskRepo = ref.read(tasksRepositoryProvider);
-    ref.onDispose(() {
-      titleController.dispose();
-      titleFocusNode.dispose();
-      descriptionController.dispose();
-      descriptionFocusNode.dispose();
-    });
+class TaskEditViewController extends StateNotifier<TaskEditViewState> {
+  TaskEditViewController(Task task, String uid)
+      : _taskRepo = TasksRepository(uid),
+        _id = task.id!,
+        super(TaskEditViewState(
+            completed: task.completed, dateTime: task.dealine)) {
+    state = state.copyWith(completed: task.completed);
+    titleController.text = task.title;
+    descriptionController.text = task.description;
   }
 
-  final Ref ref;
-  late final TasksRepository _taskRepo;
-
-  String id = '';
+  final String _id;
+  final TasksRepository _taskRepo;
 
   final titleController = TextEditingController(text: '');
   final titleFocusNode = FocusNode();
   final descriptionController = TextEditingController(text: '');
   final descriptionFocusNode = FocusNode();
 
-  void attach(Task task) {
-    id = task.id!;
-    state = state.copyWith(completed: task.completed);
-    titleController.text = task.title;
-    descriptionController.text = task.description;
-  }
-
-  void update() {
+  Future<void> update() async {
     final task = Task.fromClientOnUpdate(
-      id,
+      _id,
       titleController.text,
       descriptionController.text,
-      state.completed!,
+      state.dateTime,
+      state.completed,
     );
-    _taskRepo.update(task);
+    await _taskRepo.update(task);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    debugPrint('Dispose!');
+    titleController.dispose();
+    titleFocusNode.dispose();
+    descriptionController.dispose();
+    descriptionFocusNode.dispose();
   }
 }

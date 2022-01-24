@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:test_interval/data/providers/task_controller.dart';
+import 'package:test_interval/data/providers/task_create_controller.dart';
 import 'package:go_router/go_router.dart';
+import 'package:test_interval/data/providers/task_list_controller.dart';
 
 class TaskCreateScreen extends HookConsumerWidget {
   const TaskCreateScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _taskVM = ref.watch(taskCreateController.notifier);
+    final _taskCreateVM = ref.watch(taskCreateViewController.notifier);
 
     return Scaffold(
       appBar: AppBar(
@@ -19,14 +20,14 @@ class TaskCreateScreen extends HookConsumerWidget {
         child: Column(
           children: [
             TextField(
-              controller: _taskVM.titleController,
-              focusNode: _taskVM.titleFocusNode,
+              controller: _taskCreateVM.titleController,
+              focusNode: _taskCreateVM.titleFocusNode,
               autofocus: true,
             ),
             const SizedBox(height: 10),
             TextField(
-              controller: _taskVM.descriptionController,
-              focusNode: _taskVM.descriptionFocusNode,
+              controller: _taskCreateVM.descriptionController,
+              focusNode: _taskCreateVM.descriptionFocusNode,
             ),
             const SizedBox(height: 10),
             OutlinedButton(
@@ -34,7 +35,7 @@ class TaskCreateScreen extends HookConsumerWidget {
                 primary: Colors.black,
               ),
               onPressed: () {
-                _taskVM.submit();
+                _taskCreateVM.submit();
                 context.goNamed('tasks');
               },
               child: const Text('submit'),

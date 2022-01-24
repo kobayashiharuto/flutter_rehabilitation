@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'task_controller.dart';
+part of 'task_create_controller.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,11 +15,11 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$TaskStateTearOff {
-  const _$TaskStateTearOff();
+class _$TaskCreateViewStateTearOff {
+  const _$TaskCreateViewStateTearOff();
 
-  _TaskState call({String title = '', String description = ''}) {
-    return _TaskState(
+  _TaskCreateViewState call({String title = '', String description = ''}) {
+    return _TaskCreateViewState(
       title: title,
       description: description,
     );
@@ -27,32 +27,34 @@ class _$TaskStateTearOff {
 }
 
 /// @nodoc
-const $TaskState = _$TaskStateTearOff();
+const $TaskCreateViewState = _$TaskCreateViewStateTearOff();
 
 /// @nodoc
-mixin _$TaskState {
+mixin _$TaskCreateViewState {
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $TaskStateCopyWith<TaskState> get copyWith =>
+  $TaskCreateViewStateCopyWith<TaskCreateViewState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TaskStateCopyWith<$Res> {
-  factory $TaskStateCopyWith(TaskState value, $Res Function(TaskState) then) =
-      _$TaskStateCopyWithImpl<$Res>;
+abstract class $TaskCreateViewStateCopyWith<$Res> {
+  factory $TaskCreateViewStateCopyWith(
+          TaskCreateViewState value, $Res Function(TaskCreateViewState) then) =
+      _$TaskCreateViewStateCopyWithImpl<$Res>;
   $Res call({String title, String description});
 }
 
 /// @nodoc
-class _$TaskStateCopyWithImpl<$Res> implements $TaskStateCopyWith<$Res> {
-  _$TaskStateCopyWithImpl(this._value, this._then);
+class _$TaskCreateViewStateCopyWithImpl<$Res>
+    implements $TaskCreateViewStateCopyWith<$Res> {
+  _$TaskCreateViewStateCopyWithImpl(this._value, this._then);
 
-  final TaskState _value;
+  final TaskCreateViewState _value;
   // ignore: unused_field
-  final $Res Function(TaskState) _then;
+  final $Res Function(TaskCreateViewState) _then;
 
   @override
   $Res call({
@@ -73,29 +75,32 @@ class _$TaskStateCopyWithImpl<$Res> implements $TaskStateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$TaskStateCopyWith<$Res> implements $TaskStateCopyWith<$Res> {
-  factory _$TaskStateCopyWith(
-          _TaskState value, $Res Function(_TaskState) then) =
-      __$TaskStateCopyWithImpl<$Res>;
+abstract class _$TaskCreateViewStateCopyWith<$Res>
+    implements $TaskCreateViewStateCopyWith<$Res> {
+  factory _$TaskCreateViewStateCopyWith(_TaskCreateViewState value,
+          $Res Function(_TaskCreateViewState) then) =
+      __$TaskCreateViewStateCopyWithImpl<$Res>;
   @override
   $Res call({String title, String description});
 }
 
 /// @nodoc
-class __$TaskStateCopyWithImpl<$Res> extends _$TaskStateCopyWithImpl<$Res>
-    implements _$TaskStateCopyWith<$Res> {
-  __$TaskStateCopyWithImpl(_TaskState _value, $Res Function(_TaskState) _then)
-      : super(_value, (v) => _then(v as _TaskState));
+class __$TaskCreateViewStateCopyWithImpl<$Res>
+    extends _$TaskCreateViewStateCopyWithImpl<$Res>
+    implements _$TaskCreateViewStateCopyWith<$Res> {
+  __$TaskCreateViewStateCopyWithImpl(
+      _TaskCreateViewState _value, $Res Function(_TaskCreateViewState) _then)
+      : super(_value, (v) => _then(v as _TaskCreateViewState));
 
   @override
-  _TaskState get _value => super._value as _TaskState;
+  _TaskCreateViewState get _value => super._value as _TaskCreateViewState;
 
   @override
   $Res call({
     Object? title = freezed,
     Object? description = freezed,
   }) {
-    return _then(_TaskState(
+    return _then(_TaskCreateViewState(
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -110,8 +115,8 @@ class __$TaskStateCopyWithImpl<$Res> extends _$TaskStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_TaskState implements _TaskState {
-  const _$_TaskState({this.title = '', this.description = ''});
+class _$_TaskCreateViewState implements _TaskCreateViewState {
+  const _$_TaskCreateViewState({this.title = '', this.description = ''});
 
   @JsonKey()
   @override
@@ -122,14 +127,14 @@ class _$_TaskState implements _TaskState {
 
   @override
   String toString() {
-    return 'TaskState(title: $title, description: $description)';
+    return 'TaskCreateViewState(title: $title, description: $description)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _TaskState &&
+            other is _TaskCreateViewState &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality()
                 .equals(other.description, description));
@@ -143,12 +148,14 @@ class _$_TaskState implements _TaskState {
 
   @JsonKey(ignore: true)
   @override
-  _$TaskStateCopyWith<_TaskState> get copyWith =>
-      __$TaskStateCopyWithImpl<_TaskState>(this, _$identity);
+  _$TaskCreateViewStateCopyWith<_TaskCreateViewState> get copyWith =>
+      __$TaskCreateViewStateCopyWithImpl<_TaskCreateViewState>(
+          this, _$identity);
 }
 
-abstract class _TaskState implements TaskState {
-  const factory _TaskState({String title, String description}) = _$_TaskState;
+abstract class _TaskCreateViewState implements TaskCreateViewState {
+  const factory _TaskCreateViewState({String title, String description}) =
+      _$_TaskCreateViewState;
 
   @override
   String get title;
@@ -156,6 +163,6 @@ abstract class _TaskState implements TaskState {
   String get description;
   @override
   @JsonKey(ignore: true)
-  _$TaskStateCopyWith<_TaskState> get copyWith =>
+  _$TaskCreateViewStateCopyWith<_TaskCreateViewState> get copyWith =>
       throw _privateConstructorUsedError;
 }

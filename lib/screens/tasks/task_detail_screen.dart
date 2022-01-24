@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:test_interval/data/providers/tasks_provider.dart';
+import 'package:test_interval/data/providers/task_list_controller.dart';
 import 'package:go_router/go_router.dart';
 
 class TaskDetailScreen extends HookConsumerWidget {
@@ -11,8 +11,10 @@ class TaskDetailScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _task =
-        ref.watch(tasksProvider).firstWhereOrNull((item) => item.id == id);
+    final _task = ref
+        .watch(taskListViewController)
+        .tasks
+        .firstWhereOrNull((item) => item.id == id);
 
     if (_task == null) {
       return Scaffold(body: Text('not'));

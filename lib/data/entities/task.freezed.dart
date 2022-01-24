@@ -22,11 +22,13 @@ class _$TaskTearOff {
       {String? id,
       required String title,
       required String description,
+      required DateTime dealine,
       bool completed = false}) {
     return _Task(
       id: id,
       title: title,
       description: description,
+      dealine: dealine,
       completed: completed,
     );
   }
@@ -40,6 +42,7 @@ mixin _$Task {
   String? get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
+  DateTime get dealine => throw _privateConstructorUsedError;
   bool get completed => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -50,7 +53,12 @@ mixin _$Task {
 abstract class $TaskCopyWith<$Res> {
   factory $TaskCopyWith(Task value, $Res Function(Task) then) =
       _$TaskCopyWithImpl<$Res>;
-  $Res call({String? id, String title, String description, bool completed});
+  $Res call(
+      {String? id,
+      String title,
+      String description,
+      DateTime dealine,
+      bool completed});
 }
 
 /// @nodoc
@@ -66,6 +74,7 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
     Object? id = freezed,
     Object? title = freezed,
     Object? description = freezed,
+    Object? dealine = freezed,
     Object? completed = freezed,
   }) {
     return _then(_value.copyWith(
@@ -81,6 +90,10 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
+      dealine: dealine == freezed
+          ? _value.dealine
+          : dealine // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       completed: completed == freezed
           ? _value.completed
           : completed // ignore: cast_nullable_to_non_nullable
@@ -94,7 +107,12 @@ abstract class _$TaskCopyWith<$Res> implements $TaskCopyWith<$Res> {
   factory _$TaskCopyWith(_Task value, $Res Function(_Task) then) =
       __$TaskCopyWithImpl<$Res>;
   @override
-  $Res call({String? id, String title, String description, bool completed});
+  $Res call(
+      {String? id,
+      String title,
+      String description,
+      DateTime dealine,
+      bool completed});
 }
 
 /// @nodoc
@@ -111,6 +129,7 @@ class __$TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
     Object? id = freezed,
     Object? title = freezed,
     Object? description = freezed,
+    Object? dealine = freezed,
     Object? completed = freezed,
   }) {
     return _then(_Task(
@@ -126,6 +145,10 @@ class __$TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
+      dealine: dealine == freezed
+          ? _value.dealine
+          : dealine // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       completed: completed == freezed
           ? _value.completed
           : completed // ignore: cast_nullable_to_non_nullable
@@ -141,6 +164,7 @@ class _$_Task extends _Task {
       {this.id,
       required this.title,
       required this.description,
+      required this.dealine,
       this.completed = false})
       : super._();
 
@@ -150,13 +174,15 @@ class _$_Task extends _Task {
   final String title;
   @override
   final String description;
+  @override
+  final DateTime dealine;
   @JsonKey()
   @override
   final bool completed;
 
   @override
   String toString() {
-    return 'Task(id: $id, title: $title, description: $description, completed: $completed)';
+    return 'Task(id: $id, title: $title, description: $description, dealine: $dealine, completed: $completed)';
   }
 
   @override
@@ -168,6 +194,7 @@ class _$_Task extends _Task {
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality()
                 .equals(other.description, description) &&
+            const DeepCollectionEquality().equals(other.dealine, dealine) &&
             const DeepCollectionEquality().equals(other.completed, completed));
   }
 
@@ -177,6 +204,7 @@ class _$_Task extends _Task {
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(description),
+      const DeepCollectionEquality().hash(dealine),
       const DeepCollectionEquality().hash(completed));
 
   @JsonKey(ignore: true)
@@ -190,6 +218,7 @@ abstract class _Task extends Task {
       {String? id,
       required String title,
       required String description,
+      required DateTime dealine,
       bool completed}) = _$_Task;
   const _Task._() : super._();
 
@@ -199,6 +228,8 @@ abstract class _Task extends Task {
   String get title;
   @override
   String get description;
+  @override
+  DateTime get dealine;
   @override
   bool get completed;
   @override

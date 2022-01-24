@@ -1,44 +1,38 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:test_interval/data/entities/task.dart';
-import 'package:test_interval/data/providers/tasks_provider.dart';
-
-final tasksRepositoryProvider = Provider.autoDispose<TasksRepository>((ref) {
-  final _repository = TasksRepository();
-  ref.onDispose(_repository.dispose);
-  return _repository;
-});
+import 'package:test_interval/data/providers/session_status_provider.dart';
 
 class TasksRepository {
-  TasksRepository() {
-    listen();
+  TasksRepository(String uid) {
+    final _db = FirebaseFirestore.instance;
+    _uid = uid;
+    _tasksReadRef = _db.collection('tasks').where('uid', isEqualTo: uid);
+    _tasksWriteRef = _db.collection('tasks');
   }
 
-  final tasksStreamController = StreamController<List<Task>>();
-  final _db = FirebaseFirestore.instance;
-  final uid = 'ylVxe2Pk2ceMnNMEIWj4';
-  late final _tasksReadRef =
-      _db.collection('tasks').where('uid', isEqualTo: uid);
-  late final _tasksWriteRef = _db.collection('tasks');
+  late final String _uid;
+  late final Query _tasksReadRef;
+  late final CollectionReference _tasksWriteRef;
 
-  // ignore: avoid_void_async
-  void listen() async {
-    final listner = _tasksReadRef.snapshots();
-    await for (final snaps in listner) {
+  Stream<List<Task>> getListner() {
+    final listener = _tasksReadRef.snapshots().map((snaps) {
       final tasks = snaps.docs.map((e) => Task.fromDoc(e)).toList();
-      tasksStreamController.add(tasks);
-    }
+      return tasks;
+    });
+    return listener;
   }
 
   Future<void> create(Task task) async {
-    final map = task.toMap(uid);
+    final map = task.toMap(_uid);
     await _tasksWriteRef.add(map);
   }
 
   Future<void> update(Task task) async {
     final id = task.id!;
-    final map = task.toMap(uid);
+    final map = task.toMap(_uid);
     await _tasksWriteRef.doc(id).update(map);
   }
 
@@ -48,8 +42,4 @@ class TasksRepository {
   }
 
   Future<void> dispose() async {}
-
-  void injection(List<Task> tasks) {
-    tasksStreamController.add(tasks);
-  }
 }

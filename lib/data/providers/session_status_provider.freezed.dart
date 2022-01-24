@@ -18,9 +18,10 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$SessionStatusWrapperTearOff {
   const _$SessionStatusWrapperTearOff();
 
-  _SessionStatusWrapper call({SessionStatus? sessionStatus}) {
+  _SessionStatusWrapper call({SessionStatus? sessionStatus, String? uid}) {
     return _SessionStatusWrapper(
       sessionStatus: sessionStatus,
+      uid: uid,
     );
   }
 }
@@ -31,6 +32,7 @@ const $SessionStatusWrapper = _$SessionStatusWrapperTearOff();
 /// @nodoc
 mixin _$SessionStatusWrapper {
   SessionStatus? get sessionStatus => throw _privateConstructorUsedError;
+  String? get uid => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SessionStatusWrapperCopyWith<SessionStatusWrapper> get copyWith =>
@@ -42,7 +44,7 @@ abstract class $SessionStatusWrapperCopyWith<$Res> {
   factory $SessionStatusWrapperCopyWith(SessionStatusWrapper value,
           $Res Function(SessionStatusWrapper) then) =
       _$SessionStatusWrapperCopyWithImpl<$Res>;
-  $Res call({SessionStatus? sessionStatus});
+  $Res call({SessionStatus? sessionStatus, String? uid});
 }
 
 /// @nodoc
@@ -57,12 +59,17 @@ class _$SessionStatusWrapperCopyWithImpl<$Res>
   @override
   $Res call({
     Object? sessionStatus = freezed,
+    Object? uid = freezed,
   }) {
     return _then(_value.copyWith(
       sessionStatus: sessionStatus == freezed
           ? _value.sessionStatus
           : sessionStatus // ignore: cast_nullable_to_non_nullable
               as SessionStatus?,
+      uid: uid == freezed
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -74,7 +81,7 @@ abstract class _$SessionStatusWrapperCopyWith<$Res>
           $Res Function(_SessionStatusWrapper) then) =
       __$SessionStatusWrapperCopyWithImpl<$Res>;
   @override
-  $Res call({SessionStatus? sessionStatus});
+  $Res call({SessionStatus? sessionStatus, String? uid});
 }
 
 /// @nodoc
@@ -91,12 +98,17 @@ class __$SessionStatusWrapperCopyWithImpl<$Res>
   @override
   $Res call({
     Object? sessionStatus = freezed,
+    Object? uid = freezed,
   }) {
     return _then(_SessionStatusWrapper(
       sessionStatus: sessionStatus == freezed
           ? _value.sessionStatus
           : sessionStatus // ignore: cast_nullable_to_non_nullable
               as SessionStatus?,
+      uid: uid == freezed
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -104,14 +116,16 @@ class __$SessionStatusWrapperCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_SessionStatusWrapper implements _SessionStatusWrapper {
-  const _$_SessionStatusWrapper({this.sessionStatus});
+  const _$_SessionStatusWrapper({this.sessionStatus, this.uid});
 
   @override
   final SessionStatus? sessionStatus;
+  @override
+  final String? uid;
 
   @override
   String toString() {
-    return 'SessionStatusWrapper(sessionStatus: $sessionStatus)';
+    return 'SessionStatusWrapper(sessionStatus: $sessionStatus, uid: $uid)';
   }
 
   @override
@@ -120,12 +134,15 @@ class _$_SessionStatusWrapper implements _SessionStatusWrapper {
         (other.runtimeType == runtimeType &&
             other is _SessionStatusWrapper &&
             const DeepCollectionEquality()
-                .equals(other.sessionStatus, sessionStatus));
+                .equals(other.sessionStatus, sessionStatus) &&
+            const DeepCollectionEquality().equals(other.uid, uid));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(sessionStatus));
+      runtimeType,
+      const DeepCollectionEquality().hash(sessionStatus),
+      const DeepCollectionEquality().hash(uid));
 
   @JsonKey(ignore: true)
   @override
@@ -135,11 +152,13 @@ class _$_SessionStatusWrapper implements _SessionStatusWrapper {
 }
 
 abstract class _SessionStatusWrapper implements SessionStatusWrapper {
-  const factory _SessionStatusWrapper({SessionStatus? sessionStatus}) =
-      _$_SessionStatusWrapper;
+  const factory _SessionStatusWrapper(
+      {SessionStatus? sessionStatus, String? uid}) = _$_SessionStatusWrapper;
 
   @override
   SessionStatus? get sessionStatus;
+  @override
+  String? get uid;
   @override
   @JsonKey(ignore: true)
   _$SessionStatusWrapperCopyWith<_SessionStatusWrapper> get copyWith =>
