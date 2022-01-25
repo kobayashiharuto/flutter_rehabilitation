@@ -26,9 +26,9 @@ final taskEditViewController = StateNotifierProvider.autoDispose
 });
 
 class TaskEditViewController extends StateNotifierWithLog<TaskEditViewState> {
-  TaskEditViewController(Task task, String? uid)
-      : _taskRepo = uid != null ? TasksRepository(uid) : null,
-        _id = task.id!,
+  TaskEditViewController(Task task, this._uid)
+      : _taskRepo = TaskDocumentRepository(taskID: task.id!),
+        _taskID = task.id!,
         super(TaskEditViewState(
             completed: task.completed, dateTime: task.dealine)) {
     state = state.copyWith(completed: task.completed);
@@ -36,8 +36,9 @@ class TaskEditViewController extends StateNotifierWithLog<TaskEditViewState> {
     descriptionController.text = task.description;
   }
 
-  final String _id;
-  final TasksRepository? _taskRepo;
+  final String _taskID;
+  final String? _uid;
+  final TaskDocumentRepository? _taskRepo;
 
   final titleController = TextEditingController(text: '');
   final titleFocusNode = FocusNode();
@@ -46,13 +47,14 @@ class TaskEditViewController extends StateNotifierWithLog<TaskEditViewState> {
 
   Future<void> update() async {
     final task = Task.fromClientOnUpdate(
-      _id,
+      _taskID,
+      _uid!,
       titleController.text,
       descriptionController.text,
       state.dateTime,
       state.completed,
     );
-    await _taskRepo?.update(task);
+    await _taskRepo?.writer.update(task);
   }
 
   @override

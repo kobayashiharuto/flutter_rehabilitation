@@ -20,12 +20,14 @@ class _$TaskTearOff {
 
   _Task call(
       {String? id,
+      required String uid,
       required String title,
       required String description,
       required DateTime dealine,
       bool completed = false}) {
     return _Task(
       id: id,
+      uid: uid,
       title: title,
       description: description,
       dealine: dealine,
@@ -40,6 +42,7 @@ const $Task = _$TaskTearOff();
 /// @nodoc
 mixin _$Task {
   String? get id => throw _privateConstructorUsedError;
+  String get uid => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   DateTime get dealine => throw _privateConstructorUsedError;
@@ -55,6 +58,7 @@ abstract class $TaskCopyWith<$Res> {
       _$TaskCopyWithImpl<$Res>;
   $Res call(
       {String? id,
+      String uid,
       String title,
       String description,
       DateTime dealine,
@@ -72,6 +76,7 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
   @override
   $Res call({
     Object? id = freezed,
+    Object? uid = freezed,
     Object? title = freezed,
     Object? description = freezed,
     Object? dealine = freezed,
@@ -82,6 +87,10 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
+      uid: uid == freezed
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -109,6 +118,7 @@ abstract class _$TaskCopyWith<$Res> implements $TaskCopyWith<$Res> {
   @override
   $Res call(
       {String? id,
+      String uid,
       String title,
       String description,
       DateTime dealine,
@@ -127,6 +137,7 @@ class __$TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? uid = freezed,
     Object? title = freezed,
     Object? description = freezed,
     Object? dealine = freezed,
@@ -137,6 +148,10 @@ class __$TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
+      uid: uid == freezed
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -162,6 +177,7 @@ class __$TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
 class _$_Task extends _Task {
   const _$_Task(
       {this.id,
+      required this.uid,
       required this.title,
       required this.description,
       required this.dealine,
@@ -170,6 +186,8 @@ class _$_Task extends _Task {
 
   @override
   final String? id;
+  @override
+  final String uid;
   @override
   final String title;
   @override
@@ -182,7 +200,7 @@ class _$_Task extends _Task {
 
   @override
   String toString() {
-    return 'Task(id: $id, title: $title, description: $description, dealine: $dealine, completed: $completed)';
+    return 'Task(id: $id, uid: $uid, title: $title, description: $description, dealine: $dealine, completed: $completed)';
   }
 
   @override
@@ -191,6 +209,7 @@ class _$_Task extends _Task {
         (other.runtimeType == runtimeType &&
             other is _Task &&
             const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.uid, uid) &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality()
                 .equals(other.description, description) &&
@@ -202,6 +221,7 @@ class _$_Task extends _Task {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(uid),
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(description),
       const DeepCollectionEquality().hash(dealine),
@@ -216,6 +236,7 @@ class _$_Task extends _Task {
 abstract class _Task extends Task {
   const factory _Task(
       {String? id,
+      required String uid,
       required String title,
       required String description,
       required DateTime dealine,
@@ -224,6 +245,8 @@ abstract class _Task extends Task {
 
   @override
   String? get id;
+  @override
+  String get uid;
   @override
   String get title;
   @override

@@ -27,11 +27,12 @@ final taskCreateViewController = StateNotifierProvider.autoDispose<
 
 class TaskCreateViewController
     extends StateNotifierWithLog<TaskCreateViewState> {
-  TaskCreateViewController(String? uid)
-      : _taskRepo = uid != null ? TasksRepository(uid) : null,
+  TaskCreateViewController(this.uid)
+      : _taskRepo = uid != null ? TaskCollectionRepository(userID: uid) : null,
         super(const TaskCreateViewState());
 
-  final TasksRepository? _taskRepo;
+  final TaskCollectionRepository? _taskRepo;
+  final String? uid;
 
   final titleController = TextEditingController(text: '');
   final titleFocusNode = FocusNode();
@@ -40,8 +41,12 @@ class TaskCreateViewController
 
   void submit() {
     final task = Task.fromClientOnCreate(
-        titleController.text, descriptionController.text, DateTime.now());
-    _taskRepo?.create(task);
+      uid!,
+      titleController.text,
+      descriptionController.text,
+      DateTime.now(),
+    );
+    _taskRepo?.writer.add(task);
   }
 
   @override

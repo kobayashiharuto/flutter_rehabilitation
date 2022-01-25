@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:test_interval/data/entities/task.dart';
-import 'package:test_interval/data/providers/session_status_provider.dart';
 import 'package:test_interval/data/providers/task_list_provider.dart';
 import 'package:test_interval/utils/extensions/state_notifier_log.dart';
 

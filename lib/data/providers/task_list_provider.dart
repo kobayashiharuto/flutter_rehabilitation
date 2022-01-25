@@ -8,7 +8,7 @@ import 'package:test_interval/data/repositories/tasks_repository.dart';
 final taskListProvider = Provider.autoDispose<Stream<List<Task>>?>((ref) {
   final uid = ref.watch(sessionStatusProvider).uid;
   debugPrint('INFO UID LISTEN: ${uid ?? ''}');
-  final _taskRepo = uid != null ? TasksRepository(uid) : null;
-  final listener = _taskRepo?.getListener();
+  final _taskRepo = uid != null ? TaskCollectionRepository(userID: uid) : null;
+  final listener = _taskRepo?.reader.getListener();
   return listener;
 });
