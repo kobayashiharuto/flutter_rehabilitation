@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:test_interval/data/entities/task.dart';
 import 'package:test_interval/data/providers/session_status_provider.dart';
-import 'package:test_interval/data/repositories/tasks_repository.dart';
+import 'package:test_interval/data/providers/task_list_provider.dart';
 import 'package:test_interval/utils/extensions/state_notifier_log.dart';
 
 part 'task_list_controller.freezed.dart';
@@ -26,23 +26,21 @@ class TaskListViewState with _$TaskListViewState {
 // コントローラー
 final taskListViewController = StateNotifierProvider.autoDispose<
     TaskListViewController, TaskListViewState>((ref) {
-  final uid = ref.watch(sessionStatusProvider).uid;
-  final controller = TaskListViewController(uid);
+  final controller = TaskListViewController(ref);
   return controller;
 });
 
 class TaskListViewController extends StateNotifierWithLog<TaskListViewState> {
-  TaskListViewController(String? uid)
-      : _taskRepo = uid != null ? TasksRepository(uid) : null,
-        super(const TaskListViewState()) {
+  TaskListViewController(this.ref) : super(const TaskListViewState()) {
     listen();
   }
 
-  final TasksRepository? _taskRepo;
+  // ignore: strict_raw_type
+  final AutoDisposeStateNotifierProviderRef ref;
   StreamSubscription<List<Task>>? listener;
 
   void listen() {
-    listener = _taskRepo?.getListner().listen((tasks) {
+    listener = ref.watch(taskListProvider)?.listen((tasks) {
       state = state.copyWith(tasks: tasks, onScreenLoading: false);
     });
   }

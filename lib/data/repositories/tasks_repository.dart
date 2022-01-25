@@ -14,7 +14,7 @@ class TasksRepository {
   late final Query _tasksReadRef;
   late final CollectionReference _tasksWriteRef;
 
-  Stream<List<Task>> getListner() {
+  Stream<List<Task>> getListener() {
     final listener = _tasksReadRef.snapshots().map((snaps) {
       final tasks = snaps.docs.map((e) => Task.fromDoc(e)).toList();
       return tasks;
