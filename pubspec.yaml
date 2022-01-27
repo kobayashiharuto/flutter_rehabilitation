@@ -27,7 +27,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   freezed:
-  hive_generator: ^1.1.1
   json_serializable:
   pedantic_mono: any
 
